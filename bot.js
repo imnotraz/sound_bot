@@ -28,6 +28,11 @@ client.on('message', async message => {
                         case 's':
                             dispatcher.destroy()
                             break
+                        case 'yt':
+                            let link = message.content.split(' ')[1]
+                            dispatcher = connection.play(yt(link, {filter: 'audioonly'}))
+                            break
+            
                     }
                 }
             }
@@ -106,11 +111,6 @@ client.on('message', async message => {
                     }
                     break   
                 
-                case 'yt':
-                    let link = message.content.split(' ')[1]
-                    dispatcher = connection.play(yt(link, {filter: 'audioonly'}))
-                    break
-
                 case 'stop':
                 case 's':
                     dispatcher.destroy()
