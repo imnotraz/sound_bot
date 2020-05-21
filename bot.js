@@ -121,7 +121,7 @@ client.on('message', async message => {
                     let sounds = JSON.parse(jsonString)
                     let sound_list;
                     for(let i = 0; i < sounds.sounds.length; i++) {
-                        sound_list += (sounds.sounds[i] + "\n")
+                        sound_list += (sounds.sounds[i].name + "\n")
                     }
                     message.channel.send(sound_list)
                     break
