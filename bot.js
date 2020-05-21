@@ -6,6 +6,7 @@ const fs = require('fs')
 client.login(TOKEN)
 let connection, dispatcher
 
+
 client.on('message', async message => {
     
     if(message.author != '712929072396763146'){
