@@ -116,6 +116,14 @@ client.on('message', async message => {
                     dispatcher.destroy()
                     break
 
+                case 'list':
+                    let jsonString = fs.readFileSync('./sound.json')
+                    let sounds = JSON.parse(jsonString)
+                    let sound_list;
+                    for(let i = 0; i < sounds.sounds.length; i++) {
+                        sound_list += (sounds.sounds[i] + "\n")
+                    }
+                    break
                 case 'commands':
                 case 'c':
                     message.channel.send(new discord.MessageEmbed()
@@ -126,6 +134,7 @@ client.on('message', async message => {
                             \`sound.leave\`\nLeave the bot from the voice channel.\n
                             \`sound.upload + file.mp3\`\nAdd a sound to the bot. The message need an attached file (the sound).\n(the name of the file will be the name of the sound)\n(use underscore for whitespace).\n
                             \`sound.yt [youtube link]\`\nPlay a youtube audio/music.\n
+                            \`sound.list\`\nDisplay the audio list.\n
                             \`sound.stop\`\nStop the audio.\n
                             \`sound.remove [sound name]\`\nRemove the sound from the bot.\n
                             \`sound.commands\`\nDisplay the bot's commands.` 
