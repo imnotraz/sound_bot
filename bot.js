@@ -131,14 +131,14 @@ client.on('message', async message => {
                         .setColor('#36302F ')
                         .setTitle('Commands')
                         .setDescription(`
-                            \`sound.join\`\nJoin the bot in your current voice channel.\n
-                            \`sound.leave\`\nLeave the bot from the voice channel.\n
-                            \`sound.upload + file.mp3\`\nAdd a sound to the bot. The message need an attached file (the sound).\n(the name of the file will be the name of the sound)\n(use underscore for whitespace).\n
-                            \`sound.yt [youtube link]\`\nPlay a youtube audio/music.\n
-                            \`sound.list\`\nDisplay the audio list.\n
-                            \`sound.stop\`\nStop the audio.\n
-                            \`sound.remove [sound name]\`\nRemove the sound from the bot.\n
-                            \`sound.commands\`\nDisplay the bot's commands.` 
+                            \`s.join\`\nJoin the bot in your current voice channel.\n
+                            \`s.leave\`\nLeave the bot from the voice channel.\n
+                            \`s.upload + file.mp3\`\nAdd a sound to the bot. The message need an attached file (the sound).\n(the name of the file will be the name of the sound)\n(use underscore for whitespace).\n
+                            \`s.yt [youtube link]\`\nPlay a youtube audio/music.\n
+                            \`s.list\`\nDisplay the audio list.\n
+                            \`s.stop\`\nStop the audio.\n
+                            \`s.remove [sound name]\`\nRemove the sound from the bot.\n
+                            \`s.commands\`\nDisplay the bot's commands.` 
                         )
                     )
                     break
