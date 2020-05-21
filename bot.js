@@ -50,7 +50,7 @@ client.on('message', async message => {
 
                 case 'upload':
                 case 'u':
-                    if(message.member.roles.cache.has('712957623498047521') || message.member.roles.cache.has('626157712442654791') || message.member.roles.cache.has('466619630715404288') || message.member.roles.cache.has('601842730749919242')){
+                    if(message.member.roles.cache.has('712957623498047521') || message.member.roles.cache.has('466619798307209216')){
                         if(message.attachments.first()) {
                             if(message.attachments.first().name.split('.')[1] == 'mp3') {
                                 if(message.attachments.first().size < 1001000) {
