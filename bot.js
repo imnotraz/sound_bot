@@ -123,6 +123,7 @@ client.on('message', async message => {
                     for(let i = 0; i < sounds.sounds.length; i++) {
                         sound_list += (sounds.sounds[i] + "\n")
                     }
+                    message.channel.send(sound_list)
                     break
                 case 'commands':
                 case 'c':
