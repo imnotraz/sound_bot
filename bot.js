@@ -119,7 +119,7 @@ client.on('message', async message => {
                 case 'list':
                     let jsonString = fs.readFileSync('./sound.json')
                     let sounds = JSON.parse(jsonString)
-                    let sound_list;
+                    let sound_list = '';
                     for(let i = 0; i < sounds.sounds.length; i++) {
                         sound_list += (sounds.sounds[i].name + "\n")
                     }
