@@ -90,7 +90,7 @@ exports.list = (message) => {
     message.channel.send(sound_list)
 }
 
-exports.help = exports.commands = (message) => {
+exports.help = (message) => {
     message.channel.send(new discord.MessageEmbed()
         .setColor('#36302F ')
         .setTitle('Commands')
@@ -102,7 +102,7 @@ exports.help = exports.commands = (message) => {
             \`s.list\`\nDisplay the audio list.\n
             \`s.stop\`\nStop the audio.\n
             \`s.remove [sound name]\`\nRemove the sound from the bot.\n
-            \`s.commands\`\nDisplay the bot's commands.`
+            \`s.help\`\nDisplay the bot's commands.`
         )
     )
 }
