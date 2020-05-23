@@ -1,11 +1,5 @@
-
+const discord = require('discord.js')
 const fs = require('fs')
-const yt = require('ytdl-core')
-
-exports.online = false
-exports.connection
-exports.dispatcher
-
 
 exports.upload = exports.u = (message) => {
     if(message.member.roles.cache.has('466619798307209216')) { 
@@ -52,7 +46,6 @@ exports.upload = exports.u = (message) => {
         else message.reply('No attachment or valid url')
     }
 }
-
 
 exports.remove = exports.r = (message) => {
     if(message.member.roles.cache.has('466619798307209216')) {

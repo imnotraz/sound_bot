@@ -25,7 +25,6 @@ client.on('message', async message => {
 
                 else if(command == 'yt'){
                     let link = message.content.split(' ')[1]
-                    message.react('✅')
                     dispatcher = connection.play(yt(link, {filter: 'audioonly'}))
                 }
                 else 
