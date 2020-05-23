@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const client = new discord.Client()
 const { prefix, TOKEN } = require('./config.json')
 const fs = require('fs')
+const yt = require('ytdl-core')
 const commands = require('./commands.js')
 client.login(TOKEN)
 let connection, dispatcher
@@ -25,6 +26,7 @@ client.on('message', async message => {
 
                 else if(command == 'yt'){
                     let link = message.content.split(' ')[1]
+                    message.react('✅')
                     dispatcher = connection.play(yt(link, {filter: 'audioonly'}))
                 }
                 else 
