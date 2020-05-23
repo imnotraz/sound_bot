@@ -131,7 +131,7 @@ client.on('message', async message => {
                         .setColor('#36302F ')
                         .setTitle('Commands')
                         .setDescription(`
-                            \`s.join\`\nJoin the bot in your current voice channel.\n
+                            \`s.join\`\nJoin aaa the bot in your current voice channel.\n
                             \`s.leave\`\nLeave the bot from the voice channel.\n
                             \`s.upload + file.mp3\`\nAdd a sound to the bot. The message need an attached file (the sound).\n(the name of the file will be the name of the sound)\n(use underscore for whitespace).\n
                             \`s.yt [youtube link]\`\nPlay a youtube audio/music.\n
