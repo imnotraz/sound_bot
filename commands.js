@@ -1,5 +1,40 @@
 const discord = require('discord.js')
 const fs = require('fs')
+const db = require('./db.js')
+const yt = require('ytdl-core')
+let connection, dispatcher
+
+
+exports.play_sound = (sound_name) => {
+    if(connection.status == 0) {
+        db.get_sound(sound_name, (url, find) => {
+            if(find) dispatcher = connection.play(url)
+        })
+    }
+}
+
+exports.join = exports.j = async (message) => {
+    connection = await message.member.voice.channel.join()
+}
+
+exports.leave = exports.l = (message) => {
+    connection.disconnect()
+}
+
+exports.stop = exports.s = (message) => {
+    dispatcher.destroy()
+}
+
+exports.yt = (message) => {
+    if(connection.status == 0) {
+        let link = message.content.split(' ')[1]
+        message.react('✔️')
+        dispatcher = connection.play(yt(link, {filter: 'audioonly'}))
+    }
+    else {
+        message.channel.send("The bot must join a channel")
+    }
+}
 
 exports.upload = exports.u = (message) => {
     if(message.member.roles.cache.has('466619798307209216')) { 
@@ -11,21 +46,9 @@ exports.upload = exports.u = (message) => {
                 name: name,
                 url: url
             }
-            let jsonString = fs.readFileSync('./sound.json')
-                let sounds = JSON.parse(jsonString)
-                let already = false
-                for(let i = 0; i < sounds.sounds.length; i++){
-                    if(sounds.sounds[i].name == new_sound.name) { 
-                        already = true
-                        break
-                    }
-                }
-                if(!already) {
-                    sounds.sounds.push(new_sound)
-                    fs.writeFileSync('./sound.json', JSON.stringify(sounds))
-                    message.react('✅')
-                }
-                else message.reply("There's already a sound with this name.")
+            db.insert_sound(new_sound, () => {
+                message.react('✔️')
+            })
         }
 
         if(message.attachments.first()){
@@ -45,42 +68,27 @@ exports.upload = exports.u = (message) => {
         }
         else message.reply('No attachment or valid url')
     }
+    else message.react('❌')
 }
 
 exports.remove = exports.r = (message) => {
     if(message.member.roles.cache.has('466619798307209216')) {
         let sound_name = message.content.split(' ')[1].toLowerCase()
-        let jsonString = fs.readFileSync('./sound.json')
-        let sounds = JSON.parse(jsonString)
-        for(let i = 0; i < sounds.sounds.length; i++){
-            if(sounds.sounds[i].name == sound_name){
-                if(i == 0) {
-                    sounds.sounds.shift()
-                }
-                else if(i == sounds.sounds.length) {
-                    sounds.sounds.pop()
-                }
-                else {
-                    let one = sounds.sounds.slice(0, i)
-                    let two = sounds.sounds.slice(i+1, sounds.sounds.length+1)
-                    sounds.sounds = one.concat(two)
-                }
-                message.react('✅')
-                break
-            }
-        }
-        fs.writeFileSync('./sound.json', JSON.stringify(sounds))
+        db.remove_sound(sound_name, () => {
+            message.react('✔️')
+        })
     }
+    else message.react('❌')
 }
 
 exports.list = (message) => {
-    let jsonString = fs.readFileSync('./sound.json')
-    let sounds = JSON.parse(jsonString)
     let sound_list = '';
-    for(let i = 0; i < sounds.sounds.length; i++) {
-        sound_list += ('•' + sounds.sounds[i].name + '\n')
-    }
-    message.channel.send(sound_list)
+    db.get_sounds((sounds) => {
+        for(let i = 0; i < sounds.length; i++) {
+            sound_list += ('- ' + sounds[i].name + '\n')
+        }
+        message.channel.send(sound_list)
+    })
 }
 
 exports.help = (message) => {
