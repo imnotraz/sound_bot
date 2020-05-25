@@ -1,13 +1,8 @@
 const discord = require('discord.js')
 const client = new discord.Client()
-const { prefix, TOKEN } = require('./config.json')
-const fs = require('fs')
-const yt = require('ytdl-core')
 const commands = require('./commands.js')
-const db = require('./db.js')
-
+const { prefix, TOKEN } = require('./config.json')
 client.login(TOKEN)
-let connection, dispatcher
 
 client.on('message', async message => {
 
@@ -20,7 +15,6 @@ client.on('message', async message => {
             }
             else {
                 commands.play_sound(message.content.toLowerCase())
-                
             }
         }
         catch(err) {}
