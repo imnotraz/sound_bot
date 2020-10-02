@@ -1,6 +1,6 @@
 const mongodb = require('mongodb');
 ////////////// DA CAMBIARE
-const uri = "mongodb+srv://raz:RAZ@discordbot-cgigl.gcp.mongodb.net/test";
+const uri = "database";
 let database
 mongodb.connect(uri, {useUnifiedTopology: true}, (err, c) => {
     database = c.db('soundbot')

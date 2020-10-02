@@ -6,7 +6,7 @@ client.login(TOKEN)
 
 
 client.on('message', async message => {
-    if(message.author != 'id'){
+    if(message.author != '712929072396763146'){
         message.guild.owner
         
         try {

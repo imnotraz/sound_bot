@@ -37,7 +37,7 @@ exports.yt = (message) => {
 }
 
 exports.upload = exports.u = (message) => {
-    if(message.member.roles.cache.has('id')) { 
+    if(message.member.roles.cache.has('466619798307209216')) { 
 
         let sl = message.content.split(' ')[1]
         let sn = message.content.split(' ')[2]
@@ -72,7 +72,7 @@ exports.upload = exports.u = (message) => {
 }
 
 exports.remove = exports.r = (message) => {
-    if(message.member.roles.cache.has('id')) {
+    if(message.member.roles.cache.has('466619798307209216')) {
         let sound_name = message.content.split(' ')[1].toLowerCase()
         db.remove_sound(sound_name, () => {
             message.react('✔️')
