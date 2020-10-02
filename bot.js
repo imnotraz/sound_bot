@@ -4,10 +4,11 @@ const commands = require('./commands.js')
 const { prefix, TOKEN } = require('./config.json')
 client.login(TOKEN)
 
+
 client.on('message', async message => {
-
-    if(message.author != '712929072396763146'){
-
+    if(message.author != 'id'){
+        message.guild.owner
+        
         try {
             if(message.content.startsWith(`${prefix}.`)){
                 let command = message.content.split('.')[1].split(' ')[0]
