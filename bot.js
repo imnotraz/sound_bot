@@ -6,10 +6,10 @@ const commands = require('./commands.js')
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
-const { prefix } = process.env.PREFIX || require('./config.json')
+const prefix  = process.env.PREFIX
 const token = process.env.TOKEN
 client.login(token)
-console.log(token)
+
 
 
 client.on('message', async message => {
