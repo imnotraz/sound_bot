@@ -1,5 +1,10 @@
 const mongodb = require('mongodb');
 ////////////// DA CAMBIARE
+
+if (process.env.NODE_ENV !== 'production') {
+    require('dotenv').config();
+}
+
 const uri = process.env.DATABASEURL
 let database
 mongodb.connect(uri, {useUnifiedTopology: true}, (err, c) => {
