@@ -21,6 +21,56 @@
     .playSound:hover {
         color: gray;
     }
+
+    html {
+  font-family: Arial, sans-serif, sans;
+  background: #101010;
+}
+
+/* Background pattern */
+html {
+  background-color: #e5e5f7;
+  background-image: radial-gradient(teal 1px, #000909 1px);
+  background-size: 20px 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2em;
+  width: 60%;
+  margin: auto;
+  padding: 5em 2em;
+  background: #001010;
+  color: white;
+}
+
+button, input {
+  margin: 0 0.5em;
+  padding: 0.5em 1em;
+  border-radius: 0.5em;
+  border: none;
+}
+
+button, input[type=button] {
+  background: teal;
+  font-weight: bold;
+  transition: 0.1s ease-in-out 0s;
+}
+button:hover, input[type=button]:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.playSound {
+  transition: 0.1s ease-in-out 0s;
+}
+.playSound:hover {
+  margin: 0.25em;
+  color: teal;
+  transform: translateX(100);
+}
 </style>
 
 <body>
