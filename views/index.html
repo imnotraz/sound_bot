@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    .list {
+        list-style: none;
+        width: max-content;
+    }
+
+    .playSound {
+        cursor: pointer;
+        width: max-content;
+    }
+
+    .playSound:hover {
+        color: gray;
+    }
+</style>
+
+<body>
+    <div>
+        <input type="text" name="sound" id="soundInput">
+        <input type="button" onclick="sendRequest()" on value="PLAY" id="send">
+    </div>
+    <button onclick="stop()"> STOP</button>
+    <form style="display:none" id="form">
+        <input type="text" name="sound" id="sound">
+    </form>
+
+    <ul class="list">
+        <% sounds.forEach(function(r) { %>
+        <li class="playSound" onclick="sendRequest('<%-r.name%>')"></a><%= r.name %></li>
+        <% }); %>
+    </ul>
+</body>
+
+<script>
+    var form = document.getElementById('form')
+    var soundInput = document.getElementById('soundInput')
+    soundInput.addEventListener('keyup', function (e) {
+        if (e.keyCode == 13) {
+            sendRequest()
+        }
+    })
+
+    function stop() {
+        fetch('/stop', {
+            method: 'post'
+        })
+    }
+
+    function sendRequestFromFrom() {
+        var val = document.getElementById('soundInput').value
+        sendRequest(val)
+    }
+
+    function sendRequest(sound) {
+        document.getElementById('sound').value = sound
+        const data = new URLSearchParams(new FormData(form));
+        fetch('/', {
+            method: 'post',
+            body: data
+        })
+    }
+</script>
+
+</html>
