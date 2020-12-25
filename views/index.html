@@ -8,20 +8,6 @@
 </head>
 
 <style>
-    .list {
-        list-style: none;
-        width: max-content;
-    }
-
-    .playSound {
-        cursor: pointer;
-        width: max-content;
-    }
-
-    .playSound:hover {
-        color: gray;
-    }
-
     html {
         font-family: Arial, sans-serif, sans;
         background: #101010;
@@ -67,13 +53,26 @@
         cursor: pointer;
     }
 
+    .soundList {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin: 5em;
+    }
+
     .playSound {
+        flex-basis: 30%;
+        box-sizing: border-box;
+        padding: 0.1em;
+        vertical-align: center;
         transition: 0.1s ease-in-out 0s;
     }
 
     .playSound:hover {
-        margin: 0.25em;
-        color: teal;
+        padding: 0.5em;
+        background-color: teal;
+        color: #001010;
+        cursor: pointer;
         transform: translateX(100);
     }
 </style>
@@ -83,7 +82,7 @@
         <input type="text" name="sound" id="soundInput">
         <input type="button" onclick="sendRequest()" on value="PLAY" id="send">
     </div>
-    <div> <button onclick="stop()"> STOP</button> <button onclick="enterChannel()">ENTER CHANNEL</button></div> 
+    <div> <button onclick="stop()"> STOP</button> <button onclick="enterChannel()">ENTER CHANNEL</button></div>
     <form style="display:none" id="form">
         <input type="text" name="sound" id="sound">
     </form>
@@ -110,7 +109,7 @@
         })
     }
 
-    function enterChannel(){
+    function enterChannel() {
         fetch('/enterChannel', {
             method: 'post'
         })
