@@ -50,8 +50,6 @@ client.on('message', async message => {
     }
 })
 
-
-
 app.get('/', (req, res) => {
     functions.list_sounds((sounds) => {res.render('index.html', {sounds: sounds})})  
 })
@@ -62,6 +60,21 @@ app.post('/', (req, res) =>{
     
     commands.play_sound(req.body.sound.toLowerCase())
     res.end();
+})
+
+
+app.post('/enterChannel', (req, res) => {
+    const channel = client.channels.cache.get('638013012246134784')
+    
+    if (!channel) return console.error("The channel does not exist!");
+    channel.join().then(connection => {
+        // Yay, it worked!
+        console.log("Successfully connected.");
+    }).catch(e => {
+
+        // Oh no, it errored! Let's log it to console :)
+        console.error(e);
+    });
 })
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

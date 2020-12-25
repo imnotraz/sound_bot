@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Weeb Bot</title>
 </head>
 
 <style>
@@ -23,54 +23,59 @@
     }
 
     html {
-  font-family: Arial, sans-serif, sans;
-  background: #101010;
-}
+        font-family: Arial, sans-serif, sans;
+        background: #101010;
+    }
 
-/* Background pattern */
-html {
-  background-color: #e5e5f7;
-  background-image: radial-gradient(teal 1px, #000909 1px);
-  background-size: 20px 20px;
-}
+    /* Background pattern */
+    html {
+        background-color: #e5e5f7;
+        background-image: radial-gradient(teal 1px, #000909 1px);
+        background-size: 20px 20px;
+    }
 
-body {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2em;
-  width: 60%;
-  margin: auto;
-  padding: 5em 2em;
-  background: #001010;
-  color: white;
-}
+    body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 2em;
+        width: 60%;
+        margin: auto;
+        padding: 5em 2em;
+        background: #001010;
+        color: white;
+    }
 
-button, input {
-  margin: 0 0.5em;
-  padding: 0.5em 1em;
-  border-radius: 0.5em;
-  border: none;
-}
+    button,
+    input {
+        margin: 0 0.5em;
+        padding: 0.5em 1em;
+        border-radius: 0.5em;
+        border: none;
+    }
 
-button, input[type=button] {
-  background: teal;
-  font-weight: bold;
-  transition: 0.1s ease-in-out 0s;
-}
-button:hover, input[type=button]:hover {
-  transform: scale(1.1);
-  cursor: pointer;
-}
+    button,
+    input[type=button] {
+        background: teal;
+        font-weight: bold;
+        transition: 0.1s ease-in-out 0s;
+    }
 
-.playSound {
-  transition: 0.1s ease-in-out 0s;
-}
-.playSound:hover {
-  margin: 0.25em;
-  color: teal;
-  transform: translateX(100);
-}
+    button:hover,
+    input[type=button]:hover {
+        transform: scale(1.1);
+        cursor: pointer;
+    }
+
+    .playSound {
+        transition: 0.1s ease-in-out 0s;
+    }
+
+    .playSound:hover {
+        margin: 0.25em;
+        color: teal;
+        transform: translateX(100);
+    }
 </style>
 
 <body>
@@ -78,16 +83,16 @@ button:hover, input[type=button]:hover {
         <input type="text" name="sound" id="soundInput">
         <input type="button" onclick="sendRequest()" on value="PLAY" id="send">
     </div>
-    <button onclick="stop()"> STOP</button>
+    <div> <button onclick="stop()"> STOP</button> <button onclick="enterChannel()">ENTER CHANNEL</button></div> 
     <form style="display:none" id="form">
         <input type="text" name="sound" id="sound">
     </form>
 
-    <ul class="list">
+    <div class="soundList">
         <% sounds.forEach(function(r) { %>
-        <li class="playSound" onclick="sendRequest('<%-r.name%>')"></a><%= r.name %></li>
+        <div class="playSound" onclick="sendRequest('<%-r.name%>')"><%= r.name %></div>
         <% }); %>
-    </ul>
+    </div>
 </body>
 
 <script>
@@ -101,6 +106,12 @@ button:hover, input[type=button]:hover {
 
     function stop() {
         fetch('/stop', {
+            method: 'post'
+        })
+    }
+
+    function enterChannel(){
+        fetch('/enterChannel', {
             method: 'post'
         })
     }
