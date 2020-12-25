@@ -4,6 +4,7 @@ const commands = require('./commands.js')
 const { prefix } = require('./config.json')
 const token = process.env.TOKEN
 client.login(token)
+console.log(token)
 
 
 client.on('message', async message => {
