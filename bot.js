@@ -9,6 +9,7 @@ if (process.env.NODE_ENV !== 'production') {
 const prefix  = process.env.PREFIX
 const token = process.env.TOKEN
 client.login(token)
+console.log(token)
 
 
 
