@@ -1,7 +1,7 @@
 const discord = require('discord.js')
 const client = new discord.Client()
 const commands = require('./commands.js')
-const prefix = require('./config.json')
+const { prefix } = require('./config.json')
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
