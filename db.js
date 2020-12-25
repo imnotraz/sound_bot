@@ -1,6 +1,6 @@
 const mongodb = require('mongodb');
 ////////////// DA CAMBIARE
-const uri = "database";
+const uri = process.env.DATABASEURL
 let database
 mongodb.connect(uri, {useUnifiedTopology: true}, (err, c) => {
     database = c.db('soundbot')

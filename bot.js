@@ -1,8 +1,9 @@
 const discord = require('discord.js')
 const client = new discord.Client()
 const commands = require('./commands.js')
-const { prefix, TOKEN } = require('./config.json')
-client.login(TOKEN)
+const { prefix } = require('./config.json')
+const token = process.env.TOKEN
+client.login(token)
 
 
 client.on('message', async message => {
