@@ -8,6 +8,7 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const token = process.env.TOKEN
 client.login(token)
+console.log(token)
 
 
 client.on('message', async message => {
