@@ -2,6 +2,7 @@ const discord = require('discord.js')
 const fs = require('fs')
 const db = require('./db.js')
 const yt = require('ytdl-core')
+const { callbackify } = require('util')
 let connection, dispatcher
 
 
@@ -106,4 +107,21 @@ exports.help = (message) => {
             \`s.help\`\nDisplay the bot's commands.`
         )
     )
+}
+
+exports.joinChannel = (client, callback) => {
+
+    const channel = client.channels.cache.get('638013012246134784')
+    
+    if (!channel) return console.error("The channel does not exist!");
+    connection = channel.join().then(conn => {
+        // Yay, it worked!
+        connection = conn
+        callback()
+    }).catch(e => {
+
+        // Oh no, it errored! Let's log it to console :)
+        
+        callback()
+    });
 }
