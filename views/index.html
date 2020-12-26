@@ -1,129 +1,145 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Weeb Bot</title>
-</head>
+  </head>
 
-<style>
+  <style>
+    * {
+      --background: #1d3557;
+      --foreground: #f1faee;
+      --primary: #e63946;
+      --decoration: #457b9d;
+      --text: #121f31;
+      --shadow: rgba(0, 0, 0, 0.25);
+    }
+
     html {
-        font-family: Arial, sans-serif, sans;
-        background: #101010;
+      font-family: Arial, sans-serif, sans;
+      background-color: var(--background);
     }
 
     /* Background pattern */
     html {
-        background-color: #e5e5f7;
-        background-image: radial-gradient(teal 1px, #000909 1px);
-        background-size: 20px 20px;
+      background-image: radial-gradient(
+        var(--decoration) 1px,
+        var(--background) 1px
+      );
+      background-size: 20px 20px;
     }
 
     body {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        gap: 2em;
-        width: 60%;
-        margin: auto;
-        padding: 5em 2em;
-        background: #001010;
-        color: white;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 5em;
+      width: 60%;
+      margin: auto;
+      padding: 5em 2em;
+      background: var(--foreground);
+      color: var(--text);
+      box-shadow: 0 1px 4px 4px var(--shadow);
     }
 
     button,
     input {
-        margin: 0 0.5em;
-        padding: 0.5em 1em;
-        border-radius: 0.5em;
-        border: none;
+      margin: 0 0.5em;
+      padding: 0.5em 1em;
+      border-radius: 2em;
+      border: none;
+      box-shadow: 0 1px 2px 1px var(--shadow);
     }
 
     button,
-    input[type=button],
-    input[type=submit] {
-        background: teal;
-        font-weight: bold;
-        transition: 0.1s ease-in-out 0s;
+    input[type="button"],
+    input[type="submit"] {
+      padding: 1em 2em;
+      background: var(--primary);
+      font-weight: bold;
+      transition: 0.1s ease-in-out 0s;
     }
 
     button:hover,
-    input[type=button]:hover {
-        transform: scale(1.1);
-        cursor: pointer;
+    input[type="button"]:hover {
+      transform: scale(1.1);
+      cursor: pointer;
     }
 
     .soundList {
-        display: flex;
-        flex-wrap: wrap;
-        justify-content: space-between;
-        margin: 5em;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      justify-content: space-between;
+      gap: 0 1.5em;
+      width: 80%;
     }
 
     .playSound {
-        flex-basis: 30%;
-        box-sizing: border-box;
-        padding: 0.1em;
-        vertical-align: center;
-        transition: 0.1s ease-in-out 0s;
+      flex-basis: 30%;
+      box-sizing: border-box;
+      padding: 0.5em;
+      border-radius: 2em;
+      vertical-align: center;
+      transition: 0.2s ease-in-out 0s;
     }
 
     .playSound:hover {
-        padding: 0.5em;
-        background-color: teal;
-        color: #001010;
-        cursor: pointer;
-        transform: translateX(100);
+      background-color: var(--primary);
+      color: var(--foreground);
+      text-indent: 1em;
+      cursor: pointer;
+      transform: translateX(100);
     }
-</style>
+  </style>
 
-<body>
+  <body>
     <div>
-        <input type="text" name="sound" id="soundInput">
-        <input type="button" onclick="sendRequest()" value="PLAY" id="send">
-        <button onclick="stop()"> STOP</button>
+      <input type="text" name="sound" id="soundInput" />
+      <input type="button" onclick="sendRequest()" value="PLAY" id="send" />
+      <button onclick="stop()">STOP</button>
     </div>
-    
-    <form style="display:none" id="form">
-        <input type="text" name="sound" id="sound">
+
+    <form style="display: none" id="form">
+      <input type="text" name="sound" id="sound" />
     </form>
 
     <div class="soundList">
-        <% sounds.forEach(function(r) { %>
-        <div class="playSound" onclick="sendRequest('<%-r.name%>')"><%= r.name %></div>
-        <% }); %>
+      <% sounds.forEach(function(r) { %>
+      <div class="playSound" onclick="sendRequest('<%-r.name%>')">
+        <%= r.name %>
+      </div>
+      <% }); %>
     </div>
-</body>
+  </body>
 
-<script>
-    var form = document.getElementById('form')
-    var soundInput = document.getElementById('soundInput')
-    soundInput.addEventListener('keyup', function (e) {
-        if (e.keyCode == 13) {
-            sendRequest()
-        }
-    })
+  <script>
+    var form = document.getElementById("form");
+    var soundInput = document.getElementById("soundInput");
+    soundInput.addEventListener("keyup", function (e) {
+      if (e.keyCode == 13) {
+        sendRequest();
+      }
+    });
 
     function stop() {
-        fetch('/stop', {
-            method: 'post'
-        })
+      fetch("/stop", {
+        method: "post",
+      });
     }
 
     function sendRequestFromFrom() {
-        var val = document.getElementById('soundInput').value
-        sendRequest(val)
+      var val = document.getElementById("soundInput").value;
+      sendRequest(val);
     }
 
     function sendRequest(sound) {
-        document.getElementById('sound').value = sound
-        const data = new URLSearchParams(new FormData(form));
-        fetch('/', {
-            method: 'post',
-            body: data
-        })
+      document.getElementById("sound").value = sound;
+      const data = new URLSearchParams(new FormData(form));
+      fetch("/", {
+        method: "post",
+        body: data,
+      });
     }
-</script>
-
+  </script>
 </html>
