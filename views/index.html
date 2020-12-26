@@ -82,8 +82,9 @@
     <div>
         <input type="text" name="sound" id="soundInput">
         <input type="button" onclick="sendRequest()" on value="PLAY" id="send">
+        <button onclick="stop()"> STOP</button>
     </div>
-    <div> <button onclick="stop()"> STOP</button> <button onclick="enterChannel()">ENTER CHANNEL</button></div>
+    
     <form style="display:none" id="form">
         <input type="text" name="sound" id="sound">
     </form>
@@ -106,12 +107,6 @@
 
     function stop() {
         fetch('/stop', {
-            method: 'post'
-        })
-    }
-
-    function enterChannel() {
-        fetch('/enterChannel', {
             method: 'post'
         })
     }
