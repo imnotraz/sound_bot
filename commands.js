@@ -125,3 +125,13 @@ exports.joinChannel = (client, callback) => {
         callback()
     });
 }
+
+exports.getConnectionStatus = (callback) => {
+    if(connection && connection.status == 0){
+        
+        callback(true)
+    }else{
+        
+        callback(false)
+    }
+}
