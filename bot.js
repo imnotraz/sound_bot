@@ -33,8 +33,6 @@ const token = process.env.TOKEN
 client.login(token)
 
 
-
-
 client.on('message', async message => {
     if (message.author != '712929072396763146') {
         message.guild.owner
@@ -51,18 +49,14 @@ client.on('message', async message => {
 })
 
 app.get('/', (req, res) => {
-    commands.getConnectionStatus((connected) => {
-        if (connected == false) {
-            res.render('notConnected.html')
-        } else {
-            functions.list_sounds((sounds) => {
-                res.render('index.html', {
-                    sounds: sounds
-                })
-            })
-        }
-    })
 
+    commands.joinChannel(client, () => {
+        functions.list_sounds((sounds) => {
+            res.render('index.html', {
+                sounds: sounds
+            })
+        })
+    })
 })
 
 app.post('/stop', (req, res) => {
@@ -73,13 +67,6 @@ app.post('/', (req, res) => {
 
     commands.play_sound(req.body.sound.toLowerCase())
     res.end();
-})
-
-
-app.post('/enterChannel', (req, res) => {
-    commands.joinChannel(client, () => {
-        res.redirect('/') 
-    })
 })
 
 app.listen(PORT, () => console.log(`Listening on ${ PORT }`))

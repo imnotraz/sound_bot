@@ -115,14 +115,13 @@ exports.joinChannel = (client, callback) => {
     
     if (!channel) return console.error("The channel does not exist!");
     connection = channel.join().then(conn => {
-        // Yay, it worked!
+        
         connection = conn
+
         callback()
     }).catch(e => {
 
-        // Oh no, it errored! Let's log it to console :)
-        
-        callback()
+         callback()
     });
 }
 
