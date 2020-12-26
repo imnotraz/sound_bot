@@ -10,7 +10,6 @@ if (process.env.NODE_ENV !== 'production') {
 }
 const token = process.env.TOKEN
 client.login(token)
-client.once
 
 
 client.on('ready', () => {
@@ -39,4 +38,3 @@ client.on('message', async message => {
         catch(err) {}
     }
 })
-
