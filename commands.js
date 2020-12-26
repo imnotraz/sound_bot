@@ -5,16 +5,22 @@ const yt = require('ytdl-core')
 let connection, dispatcher
 
 
+
+
 exports.play_sound = (sound_name) => {
     if(connection.status == 0) {
         db.get_sound(sound_name, (url, find) => {
-            if(find) dispatcher = connection.play(url)
+            if(find) {
+                dispatcher = connection.play(url)
+                console.log(`-- sound [${sound_name}] is playing --`)
+            }
         })
     }
 }
 
 exports.join = exports.j = async (message) => {
     connection = await message.member.voice.channel.join()
+    console.log(`-- bot has joined channel <${message.member.voice.channel.name}@${message.member.voice.channel.id}> --`)
 }
 
 exports.leave = exports.l = (message) => {
@@ -30,6 +36,7 @@ exports.yt = (message) => {
         let link = message.content.split(' ')[1]
         message.react('✔️')
         dispatcher = connection.play(yt(link, {filter: 'audioonly'}))
+        console.log(`-- the bot is playing yt link ${link} --`)
     }
     else {
         message.channel.send("The bot must join a channel")
@@ -54,6 +61,9 @@ exports.upload = exports.u = (message) => {
         if(message.attachments.first()){
             if(message.attachments.first().name.split('.')[1] == 'mp3') {
                 if(message.attachments.first().size < 1001000) {
+                    console.log(sl)
+                    console.log("/////////////////")
+                    console.log(sn)
                     add_sound(sl.toLowerCase(), message.attachments.first().url.toLowerCase())
                 }
                 else message.reply('File too big.')
