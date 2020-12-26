@@ -1,0 +1,101 @@
+* {
+  --background: #1d3557;
+  --foreground: #f1faee;
+  --primary: #e63946;
+  --decoration: #457b9d;
+  --text: #121f31;
+  --shadow: rgba(0, 0, 0, 0.25);
+}
+
+html {
+  font-family: Arial, sans-serif, sans;
+  background-color: var(--background);
+}
+
+/* Background pattern */
+html {
+  background-image: radial-gradient(
+    var(--decoration) 1px,
+    var(--background) 1px
+  );
+  background-size: 20px 20px;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5em;
+  width: 60%;
+  min-height: 100vh;
+  margin: auto;
+  padding: 5em 2em;
+  background: var(--foreground);
+  color: var(--text);
+  box-shadow: 0 1px 4px 4px var(--shadow);
+}
+
+button,
+input {
+  margin: 0 0.5em;
+  padding: 0.5em 1em;
+  border-radius: 2em;
+  border: none;
+  box-shadow: 0 1px 2px 1px var(--shadow);
+}
+
+button,
+input[type="button"],
+input[type="submit"] {
+  padding: 1em 2em;
+  background: var(--primary);
+  font-weight: bold;
+  transition: 0.1s ease-in-out 0s;
+}
+
+button:hover,
+input[type="button"]:hover {
+  transform: scale(1.1);
+  cursor: pointer;
+}
+
+.tab-button {
+  opacity: 0.7;
+  background: none;
+  box-shadow: none;
+}
+.tab-button:hover {
+  opacity: 1;
+}
+.tab-button.active {
+  opacity: 1;
+  background-color: var(--primary);
+}
+.hidden {
+  display: none;
+}
+
+.soundList {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  justify-content: space-between;
+  gap: 0 1.5em;
+  width: 80%;
+}
+
+.playSound {
+  flex-basis: 30%;
+  box-sizing: border-box;
+  padding: 0.5em;
+  border-radius: 2em;
+  vertical-align: center;
+  transition: 0.2s ease-in-out 0s;
+}
+
+.playSound:hover {
+  background-color: var(--primary);
+  color: var(--foreground);
+  text-indent: 1em;
+  cursor: pointer;
+  transform: translateX(100);
+}
