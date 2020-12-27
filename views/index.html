@@ -1,52 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <title>Weeb Bot</title>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+  <title>Weeb Bot</title>
 
-  <body>
-    <div id="tabs">
-      <button id="soundsTabButton" class="tab-button">Sounds</button
-      ><button id="youtubeTabButton" class="tab-button">Youtube</button>
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+
+  <div>
+    <input type="text" name="sound" id="soundInput" />
+    <input type="button" onclick="sendRequest()" value="PLAY" id="send" />
+    <button onclick="stop()">STOP</button>
+  </div>
+
+  <form style="display: none" id="form">
+    <input type="text" name="sound" id="sound" />
+  </form>
+
+  <div class="soundList">
+    <% sounds.forEach(function(r) { %>
+    <div class="playSound" onclick="sendRequest('<%-r.name%>')">
+      <%= r.name %>
     </div>
-    <div id="soundsTab" class="tab">
-      <div>
-        <input type="text" name="sound" id="soundInput" />
-        <input type="button" onclick="sendRequest()" value="PLAY" id="send" />
-        <button onclick="stop()">STOP</button>
-      </div>
+    <% }); %>
+  </div>
 
-      <form style="display: none" id="form">
-        <input type="text" name="sound" id="sound" />
-      </form>
+  <script src="main.js"></script>
+</body>
 
-      <div class="soundList">
-        <% sounds.forEach(function(r) { %>
-        <div class="playSound" onclick="sendRequest('<%-r.name%>')">
-          <%= r.name %>
-        </div>
-        <% }); %>
-      </div>
-    </div>
-    <div id="youtubeTab" class="tab">
-      <div id="commands" class="youtubeCommands">
-        <div id="currentSong">Canzone corrente!!</div>
-        <button id="prev">Prev</button>
-        <button id="pause">Pause</button>
-        <button id="next">Next</button>
-      </div>
-      <div id="queue">
-        <div class="queuedSong">canzone 1 <button>Play</button></div>
-        <div class="queuedSong">canzone 2 <button>Play</button></div>
-        <div class="queuedSong">canzone 3 <button>Play</button></div>
-      </div>
-    </div>
-
-    <script src="main.js"></script>
-  </body>
 </html>
