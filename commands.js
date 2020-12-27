@@ -91,16 +91,6 @@ exports.remove = exports.r = (message) => {
     else message.react('❌')
 }
 
-exports.list = (message) => {
-    let sound_list = '';
-    db.get_sounds((sounds) => {
-        for(let i = 0; i < sounds.length; i++) {
-            sound_list += ('- ' + sounds[i].name + '\n')
-        }
-        message.channel.send(sound_list)
-    })
-}
-
 exports.help = (message) => {
     message.channel.send(new discord.MessageEmbed()
         .setColor('#36302F ')
