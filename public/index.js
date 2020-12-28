@@ -10,7 +10,7 @@ youtubeTab.classList.add("hidden");
 soundsTabButton.classList.add("active");
 
 soundInput.addEventListener("keyup", function (e) {
-  if (e.code == "Enter") {
+  if (e.code === "Enter") {
     sendRequestFromForm();
   }
 });
