@@ -11,39 +11,46 @@
 
   <body>
     <div id="tabs">
-      <button id="soundsTabButton" class="tab-button">Sounds</button
-      ><button id="youtubeTabButton" class="tab-button">Youtube</button>
+      <button id="sounds-tab-button" class="tab-button">Sounds</button>
+      <button id="youtube-tab-button" class="tab-button">Youtube</button>
     </div>
-    <div id="soundsTab" class="tab">
+
+    <div id="sounds-tab" class="tab">
       <div>
-        <input type="text" name="sound" id="soundInput" />
-        <input type="button" onclick="sendRequest()" value="PLAY" id="send" />
+        <input type="text" name="sound" id="sound-input" />
+        <input
+          type="button"
+          onclick="sendRequestFromForm()"
+          value="PLAY"
+          id="send"
+        />
         <button onclick="stop()">STOP</button>
       </div>
 
-      <form style="display: none" id="form">
+      <form id="form" class="hidden">
         <input type="text" name="sound" id="sound" />
       </form>
 
-      <div class="soundList">
+      <div class="sound-list">
         <% sounds.forEach(function(r) { %>
-        <div class="playSound" onclick="sendRequest('<%-r.name%>')">
+        <div class="play-sound" onclick="sendRequest('<%-r.name%>')">
           <%= r.name %>
         </div>
         <% }); %>
       </div>
     </div>
-    <div id="youtubeTab" class="tab">
-      <div id="commands" class="youtubeCommands">
-        <div id="currentSong">Canzone corrente!!</div>
+
+    <div id="youtube-tab" class="tab">
+      <div id="commands" class="youtube-commands">
+        <div id="current-song">Canzone corrente!!</div>
         <button id="prev">Prev</button>
         <button id="pause">Pause</button>
         <button id="next">Next</button>
       </div>
       <div id="queue">
-        <div class="queuedSong">canzone 1 <button>Play</button></div>
-        <div class="queuedSong">canzone 2 <button>Play</button></div>
-        <div class="queuedSong">canzone 3 <button>Play</button></div>
+        <div class="queued-song">canzone 1 <button>Play</button></div>
+        <div class="queued-song">canzone 2 <button>Play</button></div>
+        <div class="queued-song">canzone 3 <button>Play</button></div>
       </div>
     </div>
 

@@ -63,7 +63,7 @@ input[type="submit"] {
   display: none;
 }
 
-.soundList {
+.sound-list {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   justify-content: space-between;
@@ -71,7 +71,7 @@ input[type="submit"] {
   width: 80%;
 }
 
-.playSound {
+.play-sound {
   flex-basis: 30%;
   box-sizing: border-box;
   padding: 0.5em;
