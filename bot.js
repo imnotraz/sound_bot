@@ -3,11 +3,18 @@ if (process.env.NODE_ENV !== 'production') {
 }
 
 const express = require('express')
+const sassMiddleware = require('node-sass-middleware')
 const path = require('path')
 const PORT = process.env.PORT
 const app = express()
 
 var bodyParser = require('body-parser')
+
+app.use(sassMiddleware({
+    src: path.join(__dirname, 'style'),
+    dest: path.join(__dirname, 'public'),
+    debug: process.env.NODE_ENV !== 'production'
+}))
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({

@@ -3,3 +3,4 @@ package-lock.json
 sound.json
 .env
 config.json
+public/style.css
