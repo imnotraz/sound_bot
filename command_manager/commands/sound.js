@@ -115,13 +115,6 @@ exports.yt = {
     }
 }
 
-exports.web = {
-    command: 'web',
-    description: 'THE WEB SITEEEEEEEEEEEEE',
-    callback: (message) => {
-        message.channel.send("Click here noob >https://weeb-sound-bot.herokuapp.com/")
-    }
-}
 exports.leave = {
     command: 'leave',
     description: 'Leave the bot from the voice channel.',

@@ -65,3 +65,11 @@ exports.set = {
     expected_args: '<prefix>',
     callback: ''
 }
+
+exports.web = {
+    command: 'web',
+    description: 'THE WEB SITEEEEEEEEEEEEE',
+    callback: (message) => {
+        message.channel.send("Click here noob >https://weeb-sound-bot.herokuapp.com/")
+    }
+}
