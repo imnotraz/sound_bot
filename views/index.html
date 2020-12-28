@@ -27,10 +27,6 @@
         <button onclick="stop()">STOP</button>
       </div>
 
-      <form id="form" class="hidden">
-        <input type="text" name="sound" id="sound" />
-      </form>
-
       <div class="sound-list">
         <% sounds.forEach(function(r) { %>
         <div class="play-sound" onclick="sendRequest('<%-r.name%>')">

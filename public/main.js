@@ -1,4 +1,3 @@
-const form = document.getElementById("form");
 const soundInput = document.getElementById("sound-input");
 
 const soundsTabButton = document.getElementById("sounds-tab-button");
@@ -23,16 +22,17 @@ function stop() {
 }
 
 function sendRequestFromForm() {
-  const val = document.getElementById("sound-input").value;
-  sendRequest(val);
+  const sound = document.getElementById("sound-input").value;
+  sendRequest(sound);
 }
 
 function sendRequest(sound) {
-  document.getElementById("sound").value = sound;
-  const data = new URLSearchParams(new FormData(form));
-  fetch("/", {
+  fetch("/play/sound", {
     method: "post",
-    body: data,
+    headers: {
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify({ sound }),
   });
 }
 

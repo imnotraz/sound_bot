@@ -52,7 +52,7 @@ client.on('message', async message => {
             } else {
                 commands.play_sound(message.content.toLowerCase())
             }
-        } catch (err) {}
+        } catch (err) { }
     }
 })
 
@@ -71,10 +71,9 @@ app.post('/stop', (req, res) => {
     commands.stop()
 })
 
-app.post('/', (req, res) => {
-
+app.post('/play/sound', (req, res) => {
     commands.play_sound(req.body.sound.toLowerCase())
     res.end();
 })
 
-app.listen(PORT, () => console.log(`Listening on ${ PORT }`))
+app.listen(PORT, () => console.log(`Listening on ${PORT}`))
