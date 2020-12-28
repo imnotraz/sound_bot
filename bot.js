@@ -16,16 +16,13 @@ client.on('ready', () => {
 
 
 client.on('message', async message => {
-    
     if(message.author != '712929072396763146'){
-        
         try {
     
             if(message.content.startsWith(`${prefix}.`)){
                 console.log(`-- command [${message.content.split(' ')[0]}] requested by <${message.author.username}@${message.author.id}> --`)
                 let command = message.content.split('.')[1].split(' ')[0]
                 let args = message.content.split(/[ ]+/).slice(1)
-                console.log(args)
                 
                 commando.run_command(message, command, args)
                 //eval(`commando(message, args, ccm.${command})`)
