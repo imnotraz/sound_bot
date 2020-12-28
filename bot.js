@@ -13,7 +13,7 @@ var bodyParser = require('body-parser')
 app.use(sassMiddleware({
     src: path.join(__dirname, 'style'),
     dest: path.join(__dirname, 'public'),
-    outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : nested,
+    outputStyle: process.env.NODE_ENV === 'production' ? 'compressed' : 'nested',
     debug: process.env.NODE_ENV !== 'production'
 }))
 
