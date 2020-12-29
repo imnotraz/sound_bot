@@ -1,11 +1,13 @@
+const db = require('../../db')
+
 exports.list = {
     command: 'list',
     description: 'Display the list with all sounds.',
-    callback: (message, db) => {
+    callback: (message) => {
         let sound_list = '';
         db.get_sounds((sounds) => {
             for(let s of sounds) {
-                sound_list += ('- ' + s.name + '\n')
+                sound_list += ('**» **' + s.name + '\n')
             }
             message.channel.send(sound_list)
         })
@@ -18,7 +20,7 @@ exports.upload = {
     expected_args: '<mp3 file as attachment>',
     attachment: true,
     role: 'Vip',
-    callback: (message, args, db) => {
+    callback: (message, args) => {
         let attachment = message.attachments.first()
         if(attachment.name.split('.')[1] == 'mp3') {
             if(attachment.size < 1001000) {
@@ -38,7 +40,7 @@ exports.remove = {
     description: 'Remove a sound from the bot',
     expected_args: '<sound name>',
     role: 'Vip',
-    callback: (message, args, db) => {
+    callback: (message, args) => {
         db.remove_sound(args, () => {
             message.react('✔️')
         })
@@ -63,20 +65,6 @@ exports.leave = {
     }
 }
 
-
-exports.play_sound = {
-    command: 'play',
-    callback: (message, sound) => {
-        if(message.guild.voice.connection.status == 0) {
-            db.get_sound(sound, (url, find) => {
-                if(find) {
-                    dispatcher = message.guild.voice.connection.play(url)
-                    console.log(`-- sound [${sound}] requested --`)
-                }
-            })
-        }
-    }
-}
 
 
 

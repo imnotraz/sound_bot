@@ -3,11 +3,6 @@ const yt = require('ytdl-core')
 
 let queue = []
 let is_playing
-let current_song = {
-    by: '',
-    link: ''
-}
-
 
 exports.stop = {
     command: 'stop',
@@ -44,7 +39,7 @@ exports.pause = {
     callback: (message) => {
         let connection = message.guild.voice.connection
         if(connection.status == 0)
-            message.guild.voice.connection.dispatcher.pause(true)
+           connection.dispatcher.pause(true)
     }
 }
 
@@ -73,7 +68,13 @@ exports.yt = {
             }
             else {
                 queue.push({'link': args[0], 'by': message.author.id})
-                yt.getBasicInfo(args[0]).then( info => message.channel.send(`**${info.videoDetails.title}** added to the queue.`))
+                yt.getBasicInfo(args[0]).then( info => 
+                    message.channel.send(new discord.MessageEmbed()
+                        .setColor('#900C3F')
+                        .setTitle('YOUTUBE')
+                        .setDescription(`**Song added to the queue**\n\`\`\`${info.videoDetails.title}\`\`\``)
+                        .setFooter('Sound Bot'))
+                    )
             }
         }
         else {
@@ -121,13 +122,12 @@ function play_song(link, message) {
     message.guild.voice.connection.play(yt(link, {filter: 'audioonly'}))
     message.react('✔️')
     is_playing = true
-    current_song = { 'id': message.author.id, 'link': link}
     yt.getBasicInfo(link).then( info => {
         console.log(`-- the bot is playing ${info.videoDetails.title} --`)
         message.channel.send(new discord.MessageEmbed()
         .setColor('#900C3F')
-        .setTitle('Youtube')
-        .setDescription(`\n**NOW PLAYING** by${message.author}\n\`\`\`${info.videoDetails.title}\`\`\``)
+        .setTitle('YOUTUBE')
+        .setDescription(`**Now playing** by${message.author}\n\`\`\`${info.videoDetails.title}\`\`\``)
         .setFooter('Sound Bot')
         )
     })

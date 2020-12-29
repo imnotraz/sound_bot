@@ -16,6 +16,7 @@ exports.help = {
             .setColor('#900C3F')
             .setTitle(`${type.toUpperCase()}`)
             .setDescription(desc)
+            .setFooter('Sound Bot')
             )
             .then(mss => {
                 set_reaction(mss)

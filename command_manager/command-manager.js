@@ -65,6 +65,6 @@ function run(message, args, options) {
     else role_validate = true
     
     if((attachment && !message.attachments.first()) || !role_validate) return
-    callback(message, args, db)
+    callback(message, args)
 
 }   
