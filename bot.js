@@ -1,7 +1,7 @@
 const discord = require('discord.js')
 const client = new discord.Client()
 const { prefix } = require('./config.json')
-const commando = require('./command_manager/command-manager')
+const c_manager = require('./command_manager/command-manager')
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
@@ -15,7 +15,7 @@ client.on('ready', () => {
 })
 
 
-client.on('message', async message => {
+client.on('message', message => {
     if(message.author != '712929072396763146'){
         try {
     
@@ -24,14 +24,12 @@ client.on('message', async message => {
                 let command = message.content.split('.')[1].split(' ')[0]
                 let args = message.content.split(/[ ]+/).slice(1)
                 
-                commando.run_command(message, command, args)
-                //eval(`commando(message, args, ccm.${command})`)
+                c_manager.run_command(message, command, args)
             }
             else {
-                commands.play_sound(message.content.toLowerCase())
+                c_manager.play(message)
             }
 
-            
         }
         catch(err) {}
     }

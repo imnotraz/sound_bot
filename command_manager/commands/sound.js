@@ -68,4 +68,20 @@ exports.leave = {
 }
 
 
+exports.play_sound = {
+    command: 'play',
+    callback: (message, sound) => {
+        if(message.guild.voice.connection.status == 0) {
+            db.get_sound(sound, (url, find) => {
+                if(find) {
+                    dispatcher = message.guild.voice.connection.play(url)
+                    console.log(`-- sound [${sound}] requested --`)
+                }
+            })
+        }
+    }
+}
+
+
+
 

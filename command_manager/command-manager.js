@@ -29,7 +29,18 @@ exports.run_command = (message, command_name, args) => {
             }
     }
 
+}
 
+exports.play = (message) => {
+    let sound = message.content.toLowerCase()
+    if(message.guild.voice.connection.status == 0) {
+        db.get_sound(sound, (url, find) => {
+            if(find) {
+                dispatcher = message.guild.voice.connection.play(url)
+                console.log(`-- sound [${sound}] requested --`)
+            }
+        })
+    }
 }
 
 function run(message, args, options) {
