@@ -53,7 +53,6 @@ exports.join = {
     command: 'join',
     description: 'Join the bot in your current voice channel.',
     callback: async (message) => {
-        console.log("e dai dio")
         await message.member.voice.channel.join()
         
     }
