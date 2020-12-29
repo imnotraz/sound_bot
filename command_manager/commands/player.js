@@ -71,11 +71,9 @@ exports.yt = {
             if(!is_playing) {
                 play_song(args[0], message)
             }
-            else if(current_song.id == message.author.id)
-                play_song(args[0], message.author.id, message)
             else {
                 queue.push({'link': args[0], 'by': message.author.id})
-                message.channel.send("Song added to the queue noob")
+                yt.getBasicInfo(args[0]).then( info => message.channel.send(`**${info.videoDetails.title}** added to the queue.`))
             }
         }
         else {

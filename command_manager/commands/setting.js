@@ -68,8 +68,8 @@ exports.set = {
 
 exports.web = {
     command: 'web',
-    description: 'THE WEB SITEEEEEEEEEEEEE',
+    description: 'The website link',
     callback: (message) => {
-        message.channel.send("Click here noob >https://weeb-sound-bot.herokuapp.com/")
+        message.channel.send("Click here >https://weeb-sound-bot.herokuapp.com/")
     }
 }

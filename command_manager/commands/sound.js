@@ -1,6 +1,3 @@
-const discord = require('discord.js')
-const yt = require('ytdl-core')
-
 exports.list = {
     command: 'list',
     description: 'Display the list with all sounds.',
