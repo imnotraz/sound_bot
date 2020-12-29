@@ -22,7 +22,7 @@ exports.skip = {
     description: 'Skip the queue to the next song.',
     callback: (message) => {
         if(queue[0]){
-            play_song(queue[0].link, queue[0].by, message)
+            play_song(queue[0].link, message)
             queue.slice()
         }
         else
@@ -69,10 +69,10 @@ exports.yt = {
 
         if(connection.status == 0) {
             if(!is_playing) {
-                play_song(args[0], message.author.id, message)
+                play_song(args[0], message)
             }
-           // else if(current_song.id == message.author.id)
-            //    play_song(args[0], message.author.id, message)
+            else if(current_song.id == message.author.id)
+                play_song(args[0], message.author.id, message)
             else {
                 queue.push({'link': args[0], 'by': message.author.id})
                 message.channel.send("Song added to the queue noob")
@@ -85,7 +85,7 @@ exports.yt = {
         connection.dispatcher.on('finish', () => {
             is_playing = false
             if(queue[0]){
-                play_song(queue[0].link, queue[0].by, message)
+                play_song(queue[0].link, message)
                 queue.shift()
             }
         })
@@ -118,18 +118,19 @@ exports.queue = {
 }
 
 
-function play_song(link, by, message) {
+function play_song(link, message) {
 
     message.guild.voice.connection.play(yt(link, {filter: 'audioonly'}))
     message.react('✔️')
     is_playing = true
-    current_song = { 'id': by, 'link': link}
+    current_song = { 'id': message.author.id, 'link': link}
     yt.getBasicInfo(link).then( info => {
         console.log(`-- the bot is playing ${info.videoDetails.title} --`)
         message.channel.send(new discord.MessageEmbed()
-        .setColor('#36302F ')
+        .setColor('#900C3F')
         .setTitle('Youtube')
-        .setDescription(`Now playing \`${info.videoDetails.title}\`\nBy <@${by}>`)
+        .setDescription(`\n**NOW PLAYING** by${message.author}\n\`\`\`${info.videoDetails.title}\`\`\``)
+        .setFooter('Sound Bot')
         )
     })
 
