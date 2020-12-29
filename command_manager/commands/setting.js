@@ -13,7 +13,7 @@ exports.help = {
                 desc += `\`s.${all_commands[c].command} ${all_commands[c].expected_args ? all_commands[c].expected_args : ''}\`\n${all_commands[c].description}\n\n`
             }
             ms.edit(new discord.MessageEmbed()
-            .setColor('#36302F ')
+            .setColor('#900C3F')
             .setTitle(`${type.toUpperCase()}`)
             .setDescription(desc)
             )
