@@ -5,6 +5,7 @@
   "main": "bot.js",
   "scripts": {
     "start": "node bot.js",
+    "dev": "nodemon bot.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",
@@ -22,5 +23,8 @@
     "node-sass-middleware": "^0.11.0",
     "ytdl-core": "^4.2.1",
     "ytdl-core-discord": "^1.2.5"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.6"
   }
 }
