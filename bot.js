@@ -6,7 +6,7 @@ if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 const token = process.env.TOKEN
-const prefix = process.env.prefix
+const prefix = process.env.PREFIX
 client.login(token)
 
 
