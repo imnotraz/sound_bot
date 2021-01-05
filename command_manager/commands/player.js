@@ -15,10 +15,17 @@ exports.stop = {
 exports.skip = {
     command: 'skip',
     description: 'Skip the queue to the next song.',
-    callback: (message) => {
-        if(queue[0]){
-            play_song(queue[0].link, message)
-            queue.slice()
+    expected_args: '?<number>',
+    callback: (message, args) => {
+        if(queue[0]) {
+            if(args && args != 0) {
+                play_song(queue[args].link, queue[args].by, message)
+                queue.splice(0, (args+1))
+            }
+            else {
+                play_song(queue[0].link, queue[args].by, message)
+                queue.shift()
+            }
         }
         else
             message.channel.send('No more songs.')
@@ -64,7 +71,7 @@ exports.yt = {
 
         if(connection.status == 0) {
             if(!is_playing) {
-                play_song(args[0], message)
+                play_song(args[0], message.author.id, message)
             }
             else {
                 queue.push({'link': args[0], 'by': message.author.id})
@@ -103,10 +110,10 @@ exports.queue = {
 
         if(queue[0]) {
             let info
-            for(let q in queue) {
-                info = await yt.getBasicInfo(queue[q].link)
+            for(let i in queue) {
+                info = await yt.getBasicInfo(queue[i].link)
                 console.log(info.videoDetails.title)
-                q_list += `- ${info.videoDetails.title}\n`
+                q_list += `${i}) ${info.videoDetails.title}\n`
                 
             }
             message.channel.send(q_list)
@@ -117,7 +124,7 @@ exports.queue = {
 }
 
 
-function play_song(link, message) {
+function play_song(link, by, message) {
 
     message.guild.voice.connection.play(yt(link, {filter: 'audioonly'}))
     message.react('✔️')
@@ -127,7 +134,7 @@ function play_song(link, message) {
         message.channel.send(new discord.MessageEmbed()
         .setColor('#900C3F')
         .setTitle('YOUTUBE')
-        .setDescription(`**Now playing** by${message.author}\n\`\`\`${info.videoDetails.title}\`\`\``)
+        .setDescription(`**Now playing** by<@${by}>\n\`\`\`${info.videoDetails.title}\`\`\``)
         .setFooter('Sound Bot')
         )
     })

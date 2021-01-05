@@ -44,27 +44,46 @@ exports.play = (message) => {
 }
 
 function run(message, args, options) {
-    let {
+    let c = {
         command,
         description,
-        expected_args = '',
+        expected_args,
         attachment = false,
         role,
         callback
 
     } = options
 
-    let role_validate = false
-    if(role) {
+    validate(c, args, message, validated => {
+        if(validated) callback(message, args)
+        else message.reply(`Missing arg ${c.expected_args} or no permission for this command.`)
+    })
+}
+
+function validate(c, args, message, callback) {
+
+    let args_validate = true
+    let role_validate = true
+
+    if(c.expected_args) {
+        if(!c.expected_args.startsWith('?')) {
+            if(c.expected_args && args[0]) args_validate = true
+            else  args_validate = false
+        }
+        else if((c.attachment && !message.attachments.first()))
+            args_valida = false
+    }
+
+
+    if(c.role && !args_validate) {
+        role_validate = false
         message.member.roles.cache.forEach(r => {
-            if(r.name == role) {
-                role_validate = true
-            }
+            if(r.name == c.role) role_validate = true
         })
     }
-    else role_validate = true
-    
-    if((attachment && !message.attachments.first()) || !role_validate) return
-    callback(message, args)
 
-}   
+    
+  
+    if(args_validate && role_validate) callback(true)
+    else callback(false)
+}

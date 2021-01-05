@@ -1,4 +1,6 @@
 const discord = require('discord.js')
+const { prefix } = require('../../config.json')
+
 
 exports.help = {
     command: 'help',
@@ -10,7 +12,7 @@ exports.help = {
             const all_commands = require(`../commands/${type}`)
             
             for(let c in all_commands){
-                desc += `\`s.${all_commands[c].command} ${all_commands[c].expected_args ? all_commands[c].expected_args : ''}\`\n${all_commands[c].description}\n\n`
+                desc += `\`${prefix}${all_commands[c].command} ${all_commands[c].expected_args ? all_commands[c].expected_args : ''}\`\n${all_commands[c].description}\n\n`
             }
             ms.edit(new discord.MessageEmbed()
             .setColor('#900C3F')
@@ -59,13 +61,6 @@ exports.help = {
     }
 }
 
-
-exports.set = {
-    command: 'set',
-    description: 'Set something...',
-    expected_args: '<prefix>',
-    callback: ''
-}
 
 exports.web = {
     command: 'web',

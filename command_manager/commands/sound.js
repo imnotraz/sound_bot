@@ -17,7 +17,7 @@ exports.list = {
 exports.upload = {
     command: 'upload',
     description: 'Upload a sound to the bot',
-    expected_args: '<mp3 file as attachment>',
+    expected_args: '<sound name> <mp3 file as attachment>',
     attachment: true,
     role: 'Vip',
     callback: (message, args) => {
