@@ -1,12 +1,12 @@
 const discord = require('discord.js')
 const client = new discord.Client()
-const { prefix } = require('./config.json')
 const c_manager = require('./command_manager/command-manager')
 
 if (process.env.NODE_ENV !== 'production') {
     require('dotenv').config();
 }
 const token = process.env.TOKEN
+const prefix = process.env.prefix
 client.login(token)
 
 
