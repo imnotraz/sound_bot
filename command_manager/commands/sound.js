@@ -1,26 +1,26 @@
+const db = require('../../db')
+
 exports.list = {
     command: 'list',
     description: 'Display the list with all sounds.',
-    roles: [],
-    callback: (message, db) => {
+    callback: (message) => {
         let sound_list = '';
         db.get_sounds((sounds) => {
             for(let s of sounds) {
-                sound_list += ('- ' + s.name + '\n')
+                sound_list += ('**» **' + s.name + '\n')
             }
             message.channel.send(sound_list)
         })
     }
 }
 
-
-exports.upload = exports.u = {
+exports.upload = {
     command: 'upload',
     description: 'Upload a sound to the bot',
-    expected_args: '<mp3 file>',
+    expected_args: '<sound name> <mp3 file as attachment>',
     attachment: true,
-    roles: ['Vip'],
-    callback: (message, args, db) => {
+    role: 'Vip',
+    callback: (message, args) => {
         let attachment = message.attachments.first()
         if(attachment.name.split('.')[1] == 'mp3') {
             if(attachment.size < 1001000) {
@@ -35,43 +35,37 @@ exports.upload = exports.u = {
     }
 }
 
-
-exports.play = {
-    command: 'play',
-    desciption: 'Play a sound.',
-    expected_args: '<sound>',
-    roles: [],
-    callback: (message, args, db) => {
-        let connection = message.guild.voice.connection
-        if(connection.status == 0) {
-            db.get_sound(args, (url, find) => {
-                if(find) {
-                    dispatcher = connection.play(url)
-                    console.log(`-- sound [${args}] is playing --`)
-                }
-            })
-
-        }
+exports.remove = {
+    command: 'remove',
+    description: 'Remove a sound from the bot',
+    expected_args: '<sound name>',
+    role: 'Vip',
+    callback: (message, args) => {
+        db.remove_sound(args, () => {
+            message.react('✔️')
+        })
     }
 }
 
 
-exports.join = exports.j = {
+exports.join = {
     command: 'join',
     description: 'Join the bot in your current voice channel.',
-    roles: [],
     callback: async (message) => {
         await message.member.voice.channel.join()
         
     }
 }
 
-
-exports.leave = exports.l = {
+exports.leave = {
     command: 'leave',
     description: 'Leave the bot from the voice channel.',
-    roles: [],
     callback: async (message) => {
         await message.member.voice.channel.leave()
     }
 }
+
+
+
+
+
