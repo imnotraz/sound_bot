@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Weeb Bot</title>
+
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="tabs">
+      <button id="sounds-tab-button" class="tab-button">Sounds</button>
+      <button id="youtube-tab-button" class="tab-button">Youtube</button>
+    </div>
+
+    <div id="sounds-tab" class="tab">
+      <div>
+        <input type="text" name="sound" id="sound-input" />
+        <input
+          type="button"
+          onclick="sendRequestFromForm()"
+          value="PLAY"
+          id="send"
+        />
+        <button onclick="stop()">STOP</button>
+      </div>
+
+      <div class="sound-list">
+        <% sounds.forEach(function(r) { %>
+        <div class="play-sound" onclick="sendRequest('<%-r.name%>')">
+          <%= r.name %>
+        </div>
+        <% }); %>
+      </div>
+    </div>
+
+    <div id="youtube-tab" class="tab">
+      <div id="commands" class="youtube-commands">
+        <div id="current-song">Canzone corrente!!</div>
+        <button id="prev">Prev</button>
+        <button id="pause">Pause</button>
+        <button id="next">Next</button>
+      </div>
+      <div id="queue">
+        <div class="queued-song">canzone 1 <button>Play</button></div>
+        <div class="queued-song">canzone 2 <button>Play</button></div>
+        <div class="queued-song">canzone 3 <button>Play</button></div>
+      </div>
+    </div>
+
+    <script src="index.js"></script>
+  </body>
+</html>
