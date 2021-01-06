@@ -13,7 +13,7 @@ module.exports = ({ client }) => {
 
         if (message.content.startsWith(`${config.prefix}`)) {
           console.log(`-- command [${message.content.split(' ')[0]}] requested by <${message.author.username}@${message.author.id}> --`)
-          let command = message.content.split('.')[1].split(' ')[0]
+          let command = message.content.split(config.prefix)[1].split(' ')[0]
           let args = message.content.split(/[ ]+/).slice(1)
 
           c_manager.run_command(message, command, args)
