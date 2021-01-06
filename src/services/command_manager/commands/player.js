@@ -16,7 +16,7 @@ exports.skip = {
     command: 'skip',
     description: 'Skip the queue to the next song.',
     callback: (message) => {
-        if(queue[0]){
+        if (queue[0]) {
             play_song(queue[0].link, message)
             queue.slice()
         }
@@ -38,8 +38,8 @@ exports.pause = {
     description: 'Pause the song.',
     callback: (message) => {
         let connection = message.guild.voice.connection
-        if(connection.status == 0)
-           connection.dispatcher.pause(true)
+        if (connection.status == 0)
+            connection.dispatcher.pause(true)
     }
 }
 
@@ -48,7 +48,7 @@ exports.resume = {
     description: 'Resume the song.',
     callback: (message) => {
         let connection = message.guild.voice.connection
-        if(connection.dispatcher.paused)
+        if (connection.dispatcher.paused)
             connection.dispatcher.resume()
     }
 }
@@ -62,19 +62,19 @@ exports.yt = {
 
         let connection = message.guild.voice.connection
 
-        if(connection.status == 0) {
-            if(!is_playing) {
+        if (connection.status == 0) {
+            if (!is_playing) {
                 play_song(args[0], message)
             }
             else {
-                queue.push({'link': args[0], 'by': message.author.id})
-                yt.getBasicInfo(args[0]).then( info => 
+                queue.push({ 'link': args[0], 'by': message.author.id })
+                yt.getBasicInfo(args[0]).then(info =>
                     message.channel.send(new discord.MessageEmbed()
                         .setColor('#900C3F')
                         .setTitle('YOUTUBE')
                         .setDescription(`**Song added to the queue**\n\`\`\`${info.videoDetails.title}\`\`\``)
                         .setFooter('Sound Bot'))
-                    )
+                )
             }
         }
         else {
@@ -83,7 +83,7 @@ exports.yt = {
 
         connection.dispatcher.on('finish', () => {
             is_playing = false
-            if(queue[0]){
+            if (queue[0]) {
                 play_song(queue[0].link, message)
                 queue.shift()
             }
@@ -101,13 +101,13 @@ exports.queue = {
     callback: async (message) => {
         let q_list = ''
 
-        if(queue[0]) {
+        if (queue[0]) {
             let info
-            for(let q in queue) {
+            for (let q in queue) {
                 info = await yt.getBasicInfo(queue[q].link)
                 console.log(info.videoDetails.title)
                 q_list += `- ${info.videoDetails.title}\n`
-                
+
             }
             message.channel.send(q_list)
         }
@@ -119,16 +119,16 @@ exports.queue = {
 
 function play_song(link, message) {
 
-    message.guild.voice.connection.play(yt(link, {filter: 'audioonly'}))
+    message.guild.voice.connection.play(yt(link, { filter: 'audioonly' }))
     message.react('✔️')
     is_playing = true
-    yt.getBasicInfo(link).then( info => {
+    yt.getBasicInfo(link).then(info => {
         console.log(`-- the bot is playing ${info.videoDetails.title} --`)
         message.channel.send(new discord.MessageEmbed()
-        .setColor('#900C3F')
-        .setTitle('YOUTUBE')
-        .setDescription(`**Now playing** by${message.author}\n\`\`\`${info.videoDetails.title}\`\`\``)
-        .setFooter('Sound Bot')
+            .setColor('#900C3F')
+            .setTitle('YOUTUBE')
+            .setDescription(`**Now playing** by${message.author}\n\`\`\`${info.videoDetails.title}\`\`\``)
+            .setFooter('Sound Bot')
         )
     })
 
