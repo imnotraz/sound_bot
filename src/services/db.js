@@ -1,6 +1,5 @@
 const config = require('../config')
 const mongodb = require('mongodb');
-////////////// DA CAMBIARE
 
 let database
 mongodb.connect(config.databaseURL, { useUnifiedTopology: true }, (err, c) => {

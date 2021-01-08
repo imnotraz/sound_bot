@@ -6,7 +6,7 @@ exports.list = {
     callback: (message) => {
         let sound_list = '';
         db.get_sounds((sounds) => {
-            for(let s of sounds) {
+            for (let s of sounds) {
                 sound_list += ('**» **' + s.name + '\n')
             }
             message.channel.send(sound_list)
@@ -22,9 +22,9 @@ exports.upload = {
     role: 'Vip',
     callback: (message, args) => {
         let attachment = message.attachments.first()
-        if(attachment.name.split('.')[1] == 'mp3') {
-            if(attachment.size < 1001000) {
-                db.insert_sound({name: args[0]}, () => {
+        if (attachment.name.split('.')[1] == 'mp3') {
+            if (attachment.size < 1001000) {
+                db.insert_sound({ name: args[0] }, () => {
                     console.log(`-- ${args[0]} sound added to the list --`)
                     message.react('✔️')
                 })
@@ -53,7 +53,6 @@ exports.join = {
     description: 'Join the bot in your current voice channel.',
     callback: async (message) => {
         await message.member.voice.channel.join()
-        
     }
 }
 
