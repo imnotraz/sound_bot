@@ -25,7 +25,6 @@ exports.get_sounds = (callback) => {
 }
 
 exports.remove_sound = (sound_name, callback) => {
-    console.log("remo")
     database.collection('sounds').deleteOne({"name": sound_name}, (err) => {
         if(err) console.log(err)
         else callback()

@@ -74,7 +74,6 @@ function validate(c, args, message, callback) {
             args_valida = false
     }
 
-
     if(c.role && !args_validate) {
         role_validate = false
         message.member.roles.cache.forEach(r => {
@@ -82,8 +81,6 @@ function validate(c, args, message, callback) {
         })
     }
 
-    
-  
     if(args_validate && role_validate) callback(true)
     else callback(false)
-}
+}   

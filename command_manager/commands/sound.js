@@ -24,7 +24,7 @@ exports.upload = {
         let attachment = message.attachments.first()
         if(attachment.name.split('.')[1] == 'mp3') {
             if(attachment.size < 1001000) {
-                db.insert_sound({name: args[0]}, () => {
+                db.insert_sound({name: args[0], url: attachment.url}, () => {
                     console.log(`-- ${args[0]} sound added to the list --`)
                     message.react('✔️')
                 })
@@ -41,7 +41,7 @@ exports.remove = {
     expected_args: '<sound name>',
     role: 'Vip',
     callback: (message, args) => {
-        db.remove_sound(args, () => {
+        db.remove_sound(args[0], () => {
             message.react('✔️')
         })
     }
